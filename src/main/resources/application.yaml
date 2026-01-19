@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: prueba-backend
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/prueba_backend?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: CHANGE_ME
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8080
