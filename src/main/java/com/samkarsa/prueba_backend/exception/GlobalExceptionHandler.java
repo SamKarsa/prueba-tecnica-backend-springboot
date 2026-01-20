@@ -10,10 +10,6 @@ import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<MessageResponse> handleRuntime(RuntimeException ex) {
-        return  ResponseEntity.badRequest().body(new MessageResponse(ex.getMessage()));
-    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MessageResponse> handleValidation(MethodArgumentNotValidException ex) {
@@ -21,5 +17,10 @@ public class GlobalExceptionHandler {
                 .map(err -> err.getField() + ": " + err.getDefaultMessage())
                 .collect(Collectors.joining(", "));
         return ResponseEntity.badRequest().body(new MessageResponse(msg));
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<MessageResponse> handleRuntime(RuntimeException ex) {
+        return ResponseEntity.badRequest().body(new MessageResponse(ex.getMessage()));
     }
 }
