@@ -40,4 +40,10 @@ public class UserController {
         userService.resetPassword(token, request);
         return ResponseEntity.ok(new MessageResponse("Password reset successfully."));
     }
+
+    @GetMapping("/me")
+    public ResponseEntity<MessageResponse> me() {
+        return ResponseEntity.ok(new MessageResponse("JWT OK - authenticated"));
+    }
+
 }
