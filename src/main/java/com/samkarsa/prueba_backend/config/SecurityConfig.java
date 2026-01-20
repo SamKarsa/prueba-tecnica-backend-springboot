@@ -18,9 +18,17 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/error").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        // Static + error
+                        .requestMatchers(
+                                "/", "/index.html", "/error",
+                                "/**/*.html", "/**/*.css", "/**/*.js",
+                                "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/**/*.svg", "/**/*.ico"
+                        ).permitAll()
 
+                        // Swagger
+                        .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
+
+                        // Public endpoints
                         .requestMatchers(HttpMethod.POST,
                                 "/users/register",
                                 "/users/set-password",
@@ -37,3 +45,4 @@ public class SecurityConfig {
                 .build();
     }
 }
+

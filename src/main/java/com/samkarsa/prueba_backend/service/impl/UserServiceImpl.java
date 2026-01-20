@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
         UserToken token = tokenService.createToken(user, TokenType.REGISTER, 24 * 3600); // 24h
 
-        String link = baseUrl + "/users/set-password?token=" + token.getToken();
+        String link = baseUrl + "/set-password.html?token=" + token.getToken();
         mailService.sendRegisterLink(user.getEmail(), link);
     }
 
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
         UserToken token = tokenService.createToken(user, TokenType.RECOVERY,30 * 60); // 30 min
 
-        String link = baseUrl + "/users/recovery-set-password?token=" + token.getToken();
+        String link = baseUrl + "/set-password.html?token=" + token.getToken() + "&mode=recovery";
         mailService.sendRecoveryLink(user.getEmail(), link);
     }
 
